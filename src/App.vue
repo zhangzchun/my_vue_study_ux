@@ -1,36 +1,87 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
-      <CourseList :courses="courses"></CourseList>
-  </div>
+    <div id="app">
+        <img alt="Vue logo" src="./assets/logo.png">
+        <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
+        <MessageSlot v-if="show"></MessageSlot>
+        <CourseAdd @add-course="addCourse"></CourseAdd>
+        <CourseList :courses="courses"></CourseList>
+        <p>
+            <!-- 绑定表达式 -->
+            <!-- 课程总数：{{courses.length + '门'}} -->
+            <!-- 计算属性 -->
+            课程总数：{{total}}
+            <!-- 监听器 -->
+            课程总数：{{totalCount}}
+        </p>
+
+    </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import CourseList from '@/components/CourseList'
-import {getCourses } from "./api/course";
+    // import HelloWorld from './components/HelloWorld.vue'
+    import CourseList from '@/components/CourseList'
+    import CourseAdd from '@/components/CourseAdd'
+    import MessageSlot from '@/components/MessageSlot'
+    import {getCourses} from "./api/course";
 
-export default {
-    name: 'App',
-    data (){
-        return {
-            title: '购物车',
-            course: '',
-            selectedCourse: '',
-            courses: [],
-            totalCount: 0,
+    export default {
+        name: 'App',
+        data() {
+            return {
+                title: '购物车',
+                course: '',
+                selectedCourse: '',
+                courses: [],
+                totalCount: 0,
+                show: false
+            }
+        },
+        provide() {
+            return {
+                reload: this.reload
+            };
+        },
+        async created() {
+            // 组件实例已创建，由于未挂载，dom不存在
+            const courses = await getCourses();
+            this.courses = courses;
+        },
+        methods: {
+            addCourse(course) {
+                this.courses.push({name: course, price: (this.courses.length * 100)});
+            },
+            reload() {
+                this.isRouterAlive = false;
+                this.$nextTick(() => {
+                    this.isRouterAlive = true;
+                });
+            }
+
+        },
+        computed: {
+            total() {
+                // 计算属性有缓存
+                return this.courses.length + '门'
+            }
+        },
+        watch: {
+            courses: {
+                immediate: true,
+                // deep: true,
+                handler (newValue, oldValue) {
+                    if (newValue > oldValue ) {
+                        this.totalCount = newValue.length + '门';
+                    }
+
+                }
+            }
+        },
+        components: {
+            CourseList,
+            CourseAdd,
+            MessageSlot
         }
-    },
-    async created () {
-        // 组件实例已创建，由于未挂载，dom不存在
-        const courses = await getCourses();
-        this.courses = courses;
-    },
-    components: {
-        CourseList
     }
-}
 </script>
 
 <style>
