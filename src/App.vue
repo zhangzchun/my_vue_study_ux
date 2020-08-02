@@ -74,8 +74,8 @@
             courses: {
                 immediate: true,
                 // deep: true,
-                handler (newValue, oldValue) {
-                    if (newValue > oldValue ) {
+                handler(newValue, oldValue) {
+                    if (newValue > oldValue) {
                         this.totalCount = newValue.length + '门';
                     }
 
@@ -107,4 +107,10 @@
         fill: currentColor;
         overflow: hidden;
     }
+</style>
+
+<style scoped lang="scss"> $color: #42b983;
+a {
+    color: $color;
+}
 </style>

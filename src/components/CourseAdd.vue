@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input v-model="course" @keydown.enter="emitCourse"/>
+        <input class="inp" v-model="course" @keydown.enter="emitCourse"/>
         <button v-on:click="emitCourse">新增课程</button>
     </div>
 </template>
@@ -28,4 +28,9 @@
 
 <style scoped>
 
+</style>
+<style lang="scss" scoped>
+    .inp {
+
+    }
 </style>
