@@ -3,7 +3,10 @@
         <p v-if="courses.length == 0">没有任何课程信息</p>
         <div v-else class="course-list">
             <div v-for="c in courses" :key="c.name" :style="{'background-color': (selectedCourse === c ? '#ddd' : '')}" @click="selectedCourse = c">
-                {{ c.name }} - {{ c.price | currency('$') }}
+                <!--{{ c.name }} - {{ c.price | currency('$') }}-->
+                <router-link :to="`/course/${c.name}`">
+                    {{ c.name }} - {{ c.price | currency('$') }}
+                </router-link>
             </div>
         </div>
     </div>
