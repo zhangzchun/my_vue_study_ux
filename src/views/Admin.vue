@@ -18,6 +18,8 @@
           <!-- 监听器 -->
           课程总数：{{totalCount}}
       </p>
+
+      <router-view></router-view>
   </div>
 </template>
 

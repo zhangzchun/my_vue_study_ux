@@ -4,9 +4,15 @@
         <div v-else class="course-list">
             <div v-for="c in courses" :key="c.name" :style="{'background-color': (selectedCourse === c ? '#ddd' : '')}" @click="selectedCourse = c">
                 <!--{{ c.name }} - {{ c.price | currency('$') }}-->
-                <router-link :to="`/course/${c.name}`">
+                <!---->
+                <!--<router-link :to="`/course/${c.name}`">
+                    {{ c.name }} - {{ c.price | currency('$') }}
+                </router-link>-->
+                <!-- router children -->
+                <router-link :to="`/admin/course/${c.name}`">
                     {{ c.name }} - {{ c.price | currency('$') }}
                 </router-link>
+
             </div>
         </div>
     </div>

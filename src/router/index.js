@@ -26,7 +26,14 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-        component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue'),
+        children: [
+            {
+                // path: '/course/:name',
+                path: '/admin/course/:name',
+                component: () => import('../views/Detail.vue')
+            },
+        ]
     },
     {
         path: '/course/:name',
@@ -34,7 +41,8 @@ const routes = [
     },
     { // 会匹配所有路径
         path: '*',
-        component: () => import('../views/404.vue') }
+        component: () => import('../views/404.vue')
+    }
 ]
 
 const router = new VueRouter({
