@@ -38,17 +38,22 @@ const routes = [
         meta: {
             auth: true,
         },
-        beforeEnter(to, from, next) {
-            if (to.meta.auth) {
-                if (window.isLogin) {
-                    next()
-                } else {
-                    next('/login?redirect=' + to.fullPath)
-                }
-            } else {
-                next()
-            }
-        }
+        // beforeEnter(to, from, next) {
+        //     /*if (to.meta.auth) {
+        //         if (window.isLogin) {
+        //             next()
+        //         } else {
+        //             next('/login?redirect=' + to.fullPath)
+        //         }
+        //     } else {
+        //         next()
+        //     }*/
+        //     if (window.isLogin) {
+        //         next()
+        //     } else {
+        //         next('/login?redirect=' + to.fullPath)
+        //     }
+        // }
     },
     {
         path: '/login',

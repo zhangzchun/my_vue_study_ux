@@ -1,26 +1,26 @@
 <template>
-  <div class="admin">
-      <!-- 绝对路径 public -->
-      <!--<img alt="Vue logo" src="/assets/logo.png">-->
-      <!-- 相对路径 打包 hash -->
-      <!--<img alt="Vue logo" src="./assets/logo.png">-->
-      <!-- config publicpath -->
-      <img alt="Vue logo" :src="`${publicPath}assets/logo.png`">
-      <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
-      <MessageSlot v-if="show"></MessageSlot>
-      <CourseAdd @add-course="addCourse"></CourseAdd>
-      <CourseList :courses="courses"></CourseList>
-      <p>
-          <!-- 绑定表达式 -->
-          <!-- 课程总数：{{courses.length + '门'}} -->
-          <!-- 计算属性 -->
-          课程总数：{{total}}
-          <!-- 监听器 -->
-          课程总数：{{totalCount}}
-      </p>
+    <div class="admin">
+        <!-- 绝对路径 public -->
+        <!--<img alt="Vue logo" src="/assets/logo.png">-->
+        <!-- 相对路径 打包 hash -->
+        <!--<img alt="Vue logo" src="./assets/logo.png">-->
+        <!-- config publicpath -->
+        <img alt="Vue logo" :src="`${publicPath}assets/logo.png`">
+        <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
+        <MessageSlot v-if="show"></MessageSlot>
+        <CourseAdd @add-course="addCourse"></CourseAdd>
+        <CourseList :courses="courses"></CourseList>
+        <p>
+            <!-- 绑定表达式 -->
+            <!-- 课程总数：{{courses.length + '门'}} -->
+            <!-- 计算属性 -->
+            课程总数：{{total}}
+            <!-- 监听器 -->
+            课程总数：{{totalCount}}
+        </p>
 
-      <router-view></router-view>
-  </div>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -82,6 +82,13 @@
             CourseList,
             CourseAdd,
             MessageSlot
+        },
+        beforeRouteEnter(to, from, next) {
+            if (window.isLogin) {
+                next();
+            } else {
+                next("/login?redirect=" + to.fullPath);
+            }
         }
     }
 </script>

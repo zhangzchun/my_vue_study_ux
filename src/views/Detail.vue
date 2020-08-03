@@ -9,10 +9,10 @@
     export default {
         name: "Detail",
         created (){
-            console.log("created 发送详情请求",this.$route);
+            console.log("created 发送详情请求",this.$route.params.name);
         },
         mounted (){
-            console.log("mounted 发送详情请求",this.$route);
+            console.log("mounted 发送详情请求",this.$route.params.name);
         },
         watch: {
             $route: {
