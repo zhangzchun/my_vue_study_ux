@@ -33,8 +33,14 @@ const routes = [
                 path: '/admin/course/:name',
                 component: () => import('../views/Detail.vue')
             },
-        ]
+        ],
+        meta: {
+            auth: true,
+        }
     },
+    {
+        path: '/login',
+        component: () => import('../views/Login.vue')},
     {
         path: '/course/:name',
         component: () => import('../views/Detail.vue')
@@ -43,12 +49,23 @@ const routes = [
         path: '*',
         component: () => import('../views/404.vue')
     }
-]
+];
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
-})
+});
 
+router.beforeEach((to, from, next) => {
+    if (to.meta.auth) {
+        if (window.isLogin) {
+            next()
+        } else {
+            next('/login?redirect=' + to.fullPath)
+        }
+    } else {
+        next()
+    }
+})
 export default router

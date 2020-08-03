@@ -2,16 +2,17 @@
     <div>
         <p v-if="courses.length == 0">没有任何课程信息</p>
         <div v-else class="course-list">
-            <div v-for="c in courses" :key="c.name" :style="{'background-color': (selectedCourse === c ? '#ddd' : '')}" @click="selectedCourse = c">
-                <!--{{ c.name }} - {{ c.price | currency('$') }}-->
-                <!---->
+            <!--<div v-for="c in courses" :key="c.name" :style="{'background-color': (selectedCourse === c ? '#ddd' : '')}" @click="selectedCourse = c, $router.push(`/about/${c.name}`)">-->
+            <div v-for="c in courses" :key="c.name" :style="{'background-color': (selectedCourse === c ? '#ddd' : '')}" @click="onClick(c)">
+                {{ c.name }} - {{ c.price | currency('$') }}
+
                 <!--<router-link :to="`/course/${c.name}`">
                     {{ c.name }} - {{ c.price | currency('$') }}
                 </router-link>-->
                 <!-- router children -->
-                <router-link :to="`/admin/course/${c.name}`">
+                <!--<router-link :to="`/admin/course/${c.name}`">
                     {{ c.name }} - {{ c.price | currency('$') }}
-                </router-link>
+                </router-link>-->
 
             </div>
         </div>
@@ -39,6 +40,12 @@
         filters: {
             currency(value, symbol = '￥') {
                 return symbol + value
+            }
+        },
+        methods:{
+            onClick(c) {
+                this.selectedCourse = c;
+                this.$router.push(`/about/${c.name}`)
             }
         }
     }

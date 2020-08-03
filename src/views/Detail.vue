@@ -7,7 +7,21 @@
 
 <script>
     export default {
-        name: "Detail"
+        name: "Detail",
+        created (){
+            console.log("created 发送详情请求",this.$route.params.name);
+        },
+        mounted (){
+            console.log("mounted 发送详情请求",this.$route.params.name);
+        },
+        watch: {
+            $route: {
+                handler: () => {
+                    console.log("watch 发送详情请求",this.$route.params.name);
+                },
+                immediate: true
+            }
+        }
     }
 </script>
 
