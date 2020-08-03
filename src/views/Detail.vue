@@ -9,15 +9,15 @@
     export default {
         name: "Detail",
         created (){
-            console.log("created 发送详情请求",this.$route.params.name);
+            console.log("created 发送详情请求",this.$route);
         },
         mounted (){
-            console.log("mounted 发送详情请求",this.$route.params.name);
+            console.log("mounted 发送详情请求",this.$route);
         },
         watch: {
             $route: {
                 handler: () => {
-                    console.log("watch 发送详情请求",this.$route.params.name);
+                    console.log("watch 发送详情请求");
                 },
                 immediate: true
             }

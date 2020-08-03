@@ -31,6 +31,7 @@ const routes = [
             {
                 // path: '/course/:name',
                 path: '/admin/course/:name',
+                name:'detail',
                 component: () => import('../views/Detail.vue')
             },
         ],

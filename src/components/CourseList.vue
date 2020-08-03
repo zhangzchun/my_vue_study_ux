@@ -45,7 +45,11 @@
         methods:{
             onClick(c) {
                 this.selectedCourse = c;
-                this.$router.push(`/about/${c.name}`)
+                // this.$router.push(`/admin/course/${c.name}`)
+                this.$router.push({
+                    name:'detail',
+                    params:{name:c.name}
+                })
             }
         }
     }
