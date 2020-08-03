@@ -14,8 +14,8 @@
             // 提交 mutation 修改状态
             // this.$store.commit('login')
             // 派发动作 触发action store.dispatch
-            this.$store.dispatch('login', 'admin').then(() => {
-                
+            this.$store.dispatch('user/login', 'admin').then(() => {
+
             // 动态添加路由
             this.$router.addRoutes([
                 {
@@ -62,12 +62,15 @@
         },
         logout() {
             // window.isLogin = false
-            this.$store.commit('logout')
+            // this.$store.commit('logout')
+            this.$store.commit('user/logout')
+            this.$router.push('/')
         }
     }, computed: {
         isLogin() {
             // return window.isLogin
-            return this.$store.state.isLogin
+            // return this.$store.state.isLogin
+            return this.$store.state.user.isLogin
         }
     },
 } </script>
