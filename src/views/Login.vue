@@ -1,5 +1,7 @@
 <template>
     <div>
+        <!--<button @click="login" v-if="!isLogin">登录</button>-->
+        <!--<button @click="login" v-if="!$store.state.isLogin">登录</button>-->
         <button @click="login" v-if="!isLogin">登录</button>
         <button @click="logout" v-else>注销</button>
     </div>
@@ -7,7 +9,9 @@
 <script> export default {
     methods: {
         login() {
-            window.isLogin = true;
+            // window.isLogin = true;
+            // 修改状态只能通过store.dispatch(mutation)
+            this.$store.commit('login')
             // 动态添加路由
             this.$router.addRoutes([
                 {
@@ -48,12 +52,15 @@
                 },
             ]);
             this.$router.push(this.$route.query.redirect)
-        }, logout() {
-            window.isLogin = false
+        },
+        logout() {
+            // window.isLogin = false
+            this.$store.commit('logout')
         }
     }, computed: {
         isLogin() {
-            return window.isLogin
+            // return window.isLogin
+            return this.$store.state.isLogin
         }
     },
 } </script>

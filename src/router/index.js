@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home.vue'
+import store from '@/store/'
 
 Vue.use(VueRouter)
 
@@ -61,7 +62,7 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }*/
-    if (window.isLogin) {
+    if (store.state.isLogin) {
         if (to.path === '/login') {
             next('/')
         } else {
