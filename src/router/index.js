@@ -36,11 +36,23 @@ const routes = [
         ],
         meta: {
             auth: true,
+        },
+        beforeEnter(to, from, next) {
+            if (to.meta.auth) {
+                if (window.isLogin) {
+                    next()
+                } else {
+                    next('/login?redirect=' + to.fullPath)
+                }
+            } else {
+                next()
+            }
         }
     },
     {
         path: '/login',
-        component: () => import('../views/Login.vue')},
+        component: () => import('../views/Login.vue')
+    },
     {
         path: '/course/:name',
         component: () => import('../views/Detail.vue')
@@ -57,7 +69,7 @@ const router = new VueRouter({
     routes
 });
 
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
     if (to.meta.auth) {
         if (window.isLogin) {
             next()
@@ -67,5 +79,5 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-})
+});*/
 export default router
