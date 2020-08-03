@@ -11,7 +11,11 @@
         login() {
             // window.isLogin = true;
             // 修改状态只能通过store.dispatch(mutation)
-            this.$store.commit('login')
+            // 提交 mutation 修改状态
+            // this.$store.commit('login')
+            // 派发动作 触发action store.dispatch
+            this.$store.dispatch('login', 'admin').then(() => {
+                
             // 动态添加路由
             this.$router.addRoutes([
                 {
@@ -52,6 +56,9 @@
                 },
             ]);
             this.$router.push(this.$route.query.redirect)
+            }).catch(() => {
+                alert('用户名或密码错误')
+            });
         },
         logout() {
             // window.isLogin = false
