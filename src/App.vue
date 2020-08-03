@@ -5,7 +5,9 @@
             <router-link to="/About">About</router-link> |
             <router-link to="/admin">admin</router-link>
         </div>
-        <router-view/>
+        <keep-alive include="admin">
+            <router-view/>
+        </keep-alive>
     </div>
 </template>
 

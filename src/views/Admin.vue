@@ -32,6 +32,7 @@
     import {getCourses} from "@/api/course";
 
     export default {
+        name:'admin',
         data() {
             return {
                 title: '购物车',
@@ -47,6 +48,12 @@
             // 组件实例已创建，由于未挂载，dom不存在
             const courses = await getCourses();
             this.courses = courses;
+        },
+        activated() {
+            console.log("activated")
+        },
+        deactivated (){
+            console.log("deactivated")
         },
         methods: {
             addCourse(course) {
