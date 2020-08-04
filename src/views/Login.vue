@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState,mapActions} from 'vuex'
 
     export default {
         methods: {
@@ -17,7 +17,8 @@
                 // 提交 mutation 修改状态
                 // this.$store.commit('login')
                 // 派发动作 触发action store.dispatch
-                this.$store.dispatch('user/login', 'admin').then(() => {
+                // this.$store.dispatch('user/login', 'admin').then(() => {
+                this['user/login']( 'admin').then(() => {
 
                     // 动态添加路由
                     this.$router.addRoutes([
@@ -68,7 +69,8 @@
                 // this.$store.commit('logout')
                 this.$store.commit('user/logout')
                 this.$router.push('/')
-            }
+            },
+            ...mapActions(['user/login', 'user/logout'])
         }, computed: {
             /*isLogin() {
                 // return window.isLogin
