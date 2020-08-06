@@ -4,6 +4,11 @@
             <router-link to="/">Home</router-link> |
             <router-link to="/About">About</router-link> |
             <router-link to="/admin">admin</router-link>
+
+            <span v-if="isLogin">
+                {{welcome}}
+                <button >登出</button>
+            </span>
         </div>
         <keep-alive include="admin">
             <router-view/>
@@ -12,9 +17,14 @@
 </template>
 
 <script>
+    import {mapState,mapGetters} from 'vuex'
 
     export default {
         name: 'App',
+        computed:{
+            ...mapState('user',['isLogin']),
+            ...mapGetters('user',['welcome']),
+        }
 
     }
 </script>

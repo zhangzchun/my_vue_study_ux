@@ -1,13 +1,24 @@
 export default {
-    namespaced:true, // 独立命名空间，避免命名冲突
+    namespaced: true, // 独立命名空间，避免命名冲突
     state: {
-        isLogin: false
+        isLogin: false,
+        username: ''
     },
     mutations: {
-        login(state) {
-            state.isLogin = true
+        login(state,username) {
+            state.isLogin = true;
+            state.username = username;
         }, logout(state) {
-            state.isLogin = false
+            state.isLogin = false;
+            state.username = '';
+        },
+        /*setUsername(state, username) {
+            state.username = username;
+        }*/
+    },
+    getters: { // 派生出欢迎信息
+        welcome: state => {
+            return state.username + ',欢迎回来';
         }
     },
     actions: {
@@ -17,7 +28,7 @@ export default {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     if (username === 'admin') {
-                        commit('login')
+                        commit('login',username)
                         resolve()
                     } else {
                         reject()
